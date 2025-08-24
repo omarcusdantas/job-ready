@@ -1,0 +1,17 @@
+dist
+node_modules
+coverage
+.next/
+out/
+build
+.swc/
+.DS_Store
+*.pem
+*.tsbuildinfo
+.env
+.env.exemple
+.turbo
+robots.txt
+sitemap.xml
+pnpm-lock.yaml
+.vercel
