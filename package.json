@@ -9,7 +9,9 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "format": "prettier --write .",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
