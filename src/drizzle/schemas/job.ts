@@ -4,7 +4,7 @@ import { createdAt, id, updatedAt } from "./helpers";
 import { QuestionsTable } from "./question";
 
 const experienceLevels = ["junior", "mid-level", "senior"] as const;
-const experienceLevelEnum = pgEnum("experience_level", experienceLevels);
+export const experienceLevelEnum = pgEnum("experience_level", experienceLevels);
 
 export const JobsTable = pgTable("jobs", {
   id,

@@ -4,7 +4,7 @@ import { createdAt, id, updatedAt } from "./helpers";
 import { JobsTable } from "./job";
 
 const questionDifficulties = ["easy", "medium", "hard"] as const;
-const questionDifficultyEnum = pgEnum("questions_question_difficulty", questionDifficulties);
+export const questionDifficultyEnum = pgEnum("questions_question_difficulty", questionDifficulties);
 
 export const QuestionsTable = pgTable("questions", {
   id,
