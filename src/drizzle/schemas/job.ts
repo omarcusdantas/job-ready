@@ -3,7 +3,7 @@ import { pgEnum, pgTable, varchar } from "drizzle-orm/pg-core";
 import { createdAt, id, updatedAt } from "./helpers";
 import { QuestionsTable } from "./question";
 
-const experienceLevels = ["junior", "mid-level", "senior"] as const;
+export const experienceLevels = ["junior", "mid-level", "senior"] as const;
 export const experienceLevelEnum = pgEnum("experience_level", experienceLevels);
 
 export const JobsTable = pgTable("jobs", {
