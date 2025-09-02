@@ -1,9 +1,23 @@
-import { revalidateTag } from "next/cache";
+import { unstable_cacheTag as cacheTag, revalidateTag } from "next/cache";
 
-export function getJobsTag() {
-  return "jobs" as const;
+const jobsTag = "jobs";
+
+function getJobTagById(id: string) {
+  return `${jobsTag}:${id}`;
+}
+
+export function cacheJobs() {
+  cacheTag(jobsTag);
+}
+
+export function cacheJobById(id: string) {
+  cacheTag(getJobTagById(id));
 }
 
 export function revalidateJobsCache() {
-  revalidateTag(getJobsTag());
+  revalidateTag(jobsTag);
+}
+
+export function revalidateJobById(id: string) {
+  revalidateTag(getJobTagById(id));
 }

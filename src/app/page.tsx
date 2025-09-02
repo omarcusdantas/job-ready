@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { ArrowRightIcon, Loader2Icon, PlusIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { getJobs } from "@/features/jobs/services";
 import { formatExperienceLevel } from "@/features/jobs/utils";
 
@@ -40,20 +40,13 @@ async function Jobs() {
         {jobs.map((job) => (
           <Link className="transition-[transform_opacity] hover:scale-[1.02]" href={`/job/${job.id}`} key={job.id}>
             <Card className="h-full">
-              <div className="flex h-full items-center justify-between">
-                <div className="h-full space-y-4">
-                  <CardHeader>
-                    <CardTitle className="text-lg">{job.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-muted-foreground line-clamp-3">{job.description}</CardContent>
-                  <CardFooter className="flex gap-2">
-                    <Badge variant="outline">{formatExperienceLevel(job.experienceLevel)}</Badge>
-                  </CardFooter>
-                </div>
-                <CardContent>
-                  <ArrowRightIcon className="size-6" />
-                </CardContent>
-              </div>
+              <CardHeader>
+                <CardTitle className="text-lg">{job.name}</CardTitle>
+              </CardHeader>
+              <CardFooter className="flex justify-between">
+                <Badge variant="outline">{formatExperienceLevel(job.experienceLevel)}</Badge>
+                <ArrowRightIcon className="size-6" />
+              </CardFooter>
             </Card>
           </Link>
         ))}
