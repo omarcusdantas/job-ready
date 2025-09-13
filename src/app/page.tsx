@@ -1,27 +1,12 @@
 import Link from "next/link";
-import { Suspense } from "react";
-import { ArrowRightIcon, Loader2Icon, PlusIcon } from "lucide-react";
+import { ArrowRightIcon, PlusIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { getJobs } from "@/features/jobs/services";
 import { formatExperienceLevel } from "@/features/jobs/utils";
 
-export default function AppPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="h-screen-header flex items-center justify-center">
-          <Loader2Icon className="size-24 animate-spin" />
-        </div>
-      }
-    >
-      <Jobs />
-    </Suspense>
-  );
-}
-
-async function Jobs() {
+export default async function AppPage() {
   const jobs = await getJobs();
 
   return (
