@@ -19,7 +19,7 @@ const jobActions = [
   },
   {
     label: "Edit Job Details",
-    details: "Use this option for small adjustments to this job description.",
+    details: "Use this option for adjustments to this job posting.",
     href: "edit",
   },
 ];
