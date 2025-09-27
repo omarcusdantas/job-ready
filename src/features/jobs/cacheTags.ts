@@ -18,6 +18,6 @@ export function revalidateJobsCache() {
   revalidateTag(jobsTag);
 }
 
-export function revalidateJobById(id: string) {
+export function revalidateJobCacheById(id: string) {
   revalidateTag(getJobTagById(id));
 }

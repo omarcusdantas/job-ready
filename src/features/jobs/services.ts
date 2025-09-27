@@ -2,7 +2,7 @@ import "server-only";
 import { desc, eq } from "drizzle-orm";
 import { db } from "@/drizzle/db";
 import { JobsTable } from "@/drizzle/schema";
-import { cacheJobById, cacheJobs, revalidateJobById, revalidateJobsCache } from "@/features/jobs/cacheTags";
+import { cacheJobById, cacheJobs, revalidateJobCacheById, revalidateJobsCache } from "@/features/jobs/cacheTags";
 
 export async function getJobs() {
   "use cache";
@@ -35,7 +35,7 @@ export async function createJob(job: typeof JobsTable.$inferInsert) {
 export async function updateJob(id: string, job: Partial<typeof JobsTable.$inferInsert>) {
   await db.update(JobsTable).set(job).where(eq(JobsTable.id, id));
   revalidateJobsCache();
-  revalidateJobById(id);
+  revalidateJobCacheById(id);
 }
 
 export async function isJobIdValid(id: string) {

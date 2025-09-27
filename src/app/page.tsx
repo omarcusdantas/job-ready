@@ -12,7 +12,7 @@ export default async function AppPage() {
   return (
     <div className="container my-4">
       <div className="mb-6 flex justify-between gap-2">
-        <h1 className="text-3xl md:text-4xl lg:text-5xl">Select a job posting</h1>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl">Select a job posting</h2>
         <Button asChild>
           <Link href="/job/new">
             <PlusIcon />

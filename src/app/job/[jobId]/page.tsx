@@ -37,7 +37,7 @@ export default async function JobPage({ params }: { readonly params: Promise<{ j
       <div className="space-y-6">
         <header className="space-y-4">
           <div className="space-y-2">
-            <h1 className="text-3xl md:text-4xl">{job.name}</h1>
+            <h2 className="text-3xl md:text-4xl">{job.name}</h2>
             <div className="flex gap-2">{formatExperienceLevel(job.experienceLevel)}</div>
           </div>
           <p className="text-muted-foreground line-clamp-3">{job.description}</p>
