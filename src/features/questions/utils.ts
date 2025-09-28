@@ -1,6 +1,8 @@
 import { questionDifficulties } from "@/drizzle/schema";
 
-export function formatQuestionDifficulty(difficulty: (typeof questionDifficulties)[number]) {
+export type QuestionDifficulty = (typeof questionDifficulties)[number];
+
+export function formatQuestionDifficulty(difficulty: QuestionDifficulty) {
   switch (difficulty) {
     case "easy":
       return "Easy";
