@@ -2,6 +2,8 @@ import { questionDifficulties } from "@/drizzle/schema";
 
 export type QuestionDifficulty = (typeof questionDifficulties)[number];
 
+export type QuestionStatus = "init" | "pending-difficulty" | "pending-answer";
+
 export function formatQuestionDifficulty(difficulty: QuestionDifficulty) {
   switch (difficulty) {
     case "easy":
