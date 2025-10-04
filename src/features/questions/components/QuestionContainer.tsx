@@ -11,8 +11,8 @@ export function QuestionContainer({
   status,
   setAnswer,
 }: Readonly<{
-  answer?: string;
   question?: string;
+  answer?: string;
   feedback?: string;
   status: QuestionStatus;
   setAnswer: (value: string) => void;
@@ -25,7 +25,7 @@ export function QuestionContainer({
             <ScrollArea className="h-full min-w-48 *:h-full">
               {question === null && status === "init" ? (
                 <p className="flex h-full items-center justify-center p-6 text-base md:text-lg">
-                  Select a question difficulty above
+                  Select a difficulty above
                 </p>
               ) : (
                 question && <MarkdownRenderer className="p-6">{question}</MarkdownRenderer>
