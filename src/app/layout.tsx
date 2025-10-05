@@ -1,5 +1,6 @@
 import { Noto_Sans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${notoSans.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
