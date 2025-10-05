@@ -11,9 +11,9 @@ export function QuestionContainer({
   status,
   setAnswer,
 }: Readonly<{
-  question?: string;
-  answer?: string;
-  feedback?: string;
+  question: string;
+  answer: string;
+  feedback: string;
   status: QuestionStatus;
   setAnswer: (value: string) => void;
 }>) {
@@ -23,7 +23,7 @@ export function QuestionContainer({
         <ResizablePanelGroup direction="vertical" className="flex-grow">
           <ResizablePanel defaultSize={25} minSize={5}>
             <ScrollArea className="h-full min-w-48 *:h-full">
-              {question === null && status === "init" ? (
+              {question.trim() === "" && status === "init" ? (
                 <p className="flex h-full items-center justify-center p-6 text-base md:text-lg">
                   Select a difficulty above
                 </p>
@@ -35,7 +35,7 @@ export function QuestionContainer({
           {feedback && (
             <>
               <ResizableHandle withHandle />
-              <ResizablePanel id="feedback" defaultSize={75} minSize={5}>
+              <ResizablePanel defaultSize={75} minSize={5}>
                 <ScrollArea className="h-full min-w-48 *:h-full">
                   <MarkdownRenderer className="p-6">{feedback}</MarkdownRenderer>
                 </ScrollArea>
@@ -45,12 +45,12 @@ export function QuestionContainer({
         </ResizablePanelGroup>
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel id="answer" defaultSize={50} minSize={5}>
+      <ResizablePanel defaultSize={50} minSize={5}>
         <ScrollArea className="h-full min-w-48 *:h-full">
           <Textarea
             disabled={status !== "pending-answer"}
             onChange={(e) => setAnswer(e.target.value)}
-            value={answer ?? ""}
+            value={answer}
             placeholder="Type your answer..."
             className="h-full w-full resize-none rounded-none border-none p-6 !text-base focus-visible:ring focus-visible:ring-inset"
           />
