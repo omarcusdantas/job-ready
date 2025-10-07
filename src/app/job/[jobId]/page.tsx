@@ -24,7 +24,7 @@ const jobActions = [
   },
 ];
 
-export default async function JobPage({ params }: { readonly params: Promise<{ jobId: string }> }) {
+export default async function JobPage({ params }: Readonly<{ params: Promise<{ jobId: string }> }>) {
   const { jobId } = await params;
 
   const job = await getJobById(jobId);

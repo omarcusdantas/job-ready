@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { JobForm } from "@/features/jobs/components/JobForm";
 import { getJobById } from "@/features/jobs/services";
 
-export default async function JobEditPage({ params }: { readonly params: Promise<{ jobId: string }> }) {
+export default async function JobEditPage({ params }: Readonly<{ params: Promise<{ jobId: string }> }>) {
   const { jobId } = await params;
 
   return (
@@ -24,7 +24,7 @@ export default async function JobEditPage({ params }: { readonly params: Promise
   );
 }
 
-export async function SuspendedJobForm({ jobId }: { readonly jobId: string }) {
+export async function SuspendedJobForm({ jobId }: Readonly<{ jobId: string }>) {
   const job = await getJobById(jobId);
   if (!job) return notFound();
 
