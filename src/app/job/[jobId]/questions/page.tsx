@@ -4,12 +4,12 @@ import { BackLink } from "@/components/BackLink";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getQuestionsByJobId } from "@/features/questions/services";
+import { getQuestionsPreviewsByJobId } from "@/features/questions/services";
 import { formatQuestionDifficulty } from "@/features/questions/utils";
 
 export default async function QuestionsPage({ params }: Readonly<{ params: Promise<{ jobId: string }> }>) {
   const { jobId } = await params;
-  const questions = await getQuestionsByJobId(jobId);
+  const questions = await getQuestionsPreviewsByJobId(jobId);
 
   return (
     <div className="container my-4 space-y-4">
