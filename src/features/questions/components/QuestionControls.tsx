@@ -19,7 +19,7 @@ export function QuestionControls({
   reset: () => void;
 }>) {
   return (
-    <div className="flex gap-2">
+    <div className="mb-4 flex gap-2">
       {status !== "pending-answer" ? (
         questionDifficulties.map((difficulty) => (
           <Button size="sm" onClick={() => requestQuestion(difficulty)} disabled={isLoading} key={difficulty}>

@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${notoSans.variable} font-sans antialiased`}>
+      <body className={`${notoSans.variable} h-screen-header font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange>
           {children}
           <Toaster />
