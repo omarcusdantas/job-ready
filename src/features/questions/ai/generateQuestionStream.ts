@@ -1,9 +1,9 @@
 import { ModelMessage, streamText } from "ai";
 import { JobsTable, QuestionsTable } from "@/drizzle/schema";
-import { QuestionDifficulty } from "@/features/questions/utils";
-import { geminiModel } from "./models/gemini";
+import { geminiModel } from "@/lib/ai/models/gemini";
+import { QuestionDifficulty } from "../utils";
 
-export function generateQuestion({
+export function generateQuestionStream({
   previousQuestions,
   difficulty,
   job,

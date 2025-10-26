@@ -21,7 +21,9 @@ export function useQuestion({ jobId, onFinish }: Readonly<{ jobId: string; onFin
     transport: new DefaultChatTransport({
       api: "/api/questions",
       prepareSendMessagesRequest({ messages }) {
-        return { body: { messagePart: messages.at(-1)?.parts[0], jobId } };
+        const lastMessage = messages.at(-1);
+        const textMessage = lastMessage?.parts.find((p) => p.type === "text");
+        return { body: { difficulty: textMessage?.text, jobId } };
       },
     }),
     onData: (dataPart) => {
@@ -41,9 +43,8 @@ export function useQuestion({ jobId, onFinish }: Readonly<{ jobId: string; onFin
   useEffect(() => {
     if (questionStatus === "submitted") return;
 
-    const question = questionMessages
-      .findLast((m) => m.role === "assistant")
-      ?.parts.findLast((p) => p.type === "text")?.text;
+    const lastAssistantMessage = questionMessages.findLast((m) => m.role === "assistant");
+    const question = lastAssistantMessage?.parts.find((p) => p.type === "text")?.text;
 
     setQuestion(question ?? "");
   }, [questionMessages]);

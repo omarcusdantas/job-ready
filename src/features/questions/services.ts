@@ -2,7 +2,11 @@ import "server-only";
 import { desc, eq, sql } from "drizzle-orm";
 import { db } from "@/drizzle/db";
 import { QuestionsTable } from "@/drizzle/schema";
-import { cacheQuestionsPreviewsByJobId } from "@/features/questions/cacheTags";
+import {
+  cacheQuestionsPreviewsByJobId,
+  revalidateQuestionsCacheByJobId,
+  revalidateQuestionsPreviewsCacheByJobId,
+} from "@/features/questions/cacheTags";
 
 export async function getQuestionsPreviewsByJobId(jobId: string) {
   "use cache";
@@ -32,4 +36,15 @@ export async function getQuestionsByJobId(jobId: string) {
     .from(QuestionsTable)
     .where(eq(QuestionsTable.jobId, jobId))
     .orderBy(desc(QuestionsTable.updatedAt));
+}
+
+export async function createQuestion(question: typeof QuestionsTable.$inferInsert) {
+  const [newQuestion] = await db.insert(QuestionsTable).values(question).returning({
+    id: QuestionsTable.id,
+  });
+
+  revalidateQuestionsPreviewsCacheByJobId(question.jobId);
+  revalidateQuestionsCacheByJobId(question.jobId);
+
+  return newQuestion.id;
 }
