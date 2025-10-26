@@ -20,6 +20,7 @@ export async function createQuestionStream(jobId: string, difficulty: QuestionDi
         job,
         onFinish: async (question) => {
           const questionId = await createQuestion({ jobId, text: question, difficulty });
+
           writer.write({
             type: "data-questionId",
             data: { questionId: questionId },

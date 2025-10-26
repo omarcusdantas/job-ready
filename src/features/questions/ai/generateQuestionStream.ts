@@ -12,7 +12,7 @@ export function generateQuestionStream({
   previousQuestions: Pick<typeof QuestionsTable.$inferSelect, "text" | "difficulty">[];
   difficulty: QuestionDifficulty;
   job: Pick<typeof JobsTable.$inferSelect, "name" | "description" | "experienceLevel">;
-  onFinish: (question: string) => void;
+  onFinish: (question: string) => void | Promise<void>;
 }) {
   const previousMessages = previousQuestions.flatMap(
     (question) =>

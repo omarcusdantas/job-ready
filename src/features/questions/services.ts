@@ -3,6 +3,7 @@ import { desc, eq, sql } from "drizzle-orm";
 import { db } from "@/drizzle/db";
 import { QuestionsTable } from "@/drizzle/schema";
 import {
+  cacheQuestionsByJobId,
   cacheQuestionsPreviewsByJobId,
   revalidateQuestionsCacheByJobId,
   revalidateQuestionsPreviewsCacheByJobId,
@@ -25,7 +26,7 @@ export async function getQuestionsPreviewsByJobId(jobId: string) {
 
 export async function getQuestionsByJobId(jobId: string) {
   "use cache";
-  cacheQuestionsPreviewsByJobId(jobId);
+  cacheQuestionsByJobId(jobId);
 
   return db
     .select({

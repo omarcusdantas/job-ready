@@ -28,8 +28,11 @@ export async function getJobById(id: string) {
 }
 
 export async function createJob(job: typeof JobsTable.$inferInsert) {
-  await db.insert(JobsTable).values(job);
+  const [newJob] = await db.insert(JobsTable).values(job).returning({ id: JobsTable.id });
+
   revalidateJobsCache();
+
+  return newJob.id;
 }
 
 export async function updateJob(id: string, job: Partial<typeof JobsTable.$inferInsert>) {
