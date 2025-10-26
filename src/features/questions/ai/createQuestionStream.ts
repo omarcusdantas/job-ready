@@ -1,6 +1,7 @@
 import { createUIMessageStream, createUIMessageStreamResponse } from "ai";
 import { getJobById } from "@/features/jobs/services";
 import { generateQuestionStream } from "./generateQuestionStream";
+import { revalidateQuestionsCacheByJobId, revalidateQuestionsPreviewsCacheByJobId } from "../cacheTags";
 import { createQuestion, getQuestionsByJobId } from "../services";
 import { QuestionDifficulty } from "../utils";
 
@@ -28,6 +29,12 @@ export async function createQuestionStream(jobId: string, difficulty: QuestionDi
           });
         },
       });
+
+      // Revalidate outside the streaming response context to ensure cache invalidation takes effect
+      // Revalidating inside the stream doesn't work reliably in Next.js
+      revalidateQuestionsCacheByJobId(jobId);
+      revalidateQuestionsPreviewsCacheByJobId(jobId);
+
       writer.merge(result.toUIMessageStream());
     },
   });
