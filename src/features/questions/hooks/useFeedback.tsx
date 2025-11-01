@@ -8,7 +8,7 @@ export function useFeedback({ onFinish }: Readonly<{ onFinish: () => void }>) {
     isLoading: isGeneratingFeedback,
     complete,
   } = useCompletion({
-    api: "/api/questions/feedback",
+    api: "/api/feedbacks",
     onFinish: onFinish,
     onError: (error) => {
       toast.error(error.message);
@@ -16,7 +16,7 @@ export function useFeedback({ onFinish }: Readonly<{ onFinish: () => void }>) {
   });
 
   function generateFeedback(questionId: string, answer: string) {
-    complete(answer?.trim(), { body: { questionId } });
+    complete(answer.trim(), { body: { questionId } });
   }
 
   return { feedback, setFeedback, isGeneratingFeedback, generateFeedback };

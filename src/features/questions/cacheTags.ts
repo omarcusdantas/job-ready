@@ -6,8 +6,16 @@ function getQuestionsTagByJobId(jobId: string) {
   return `${questionsTag}:job:${jobId}`;
 }
 
+function getQuestionTagById(id: string) {
+  return `${questionsTag}:${id}`;
+}
+
 function getQuestionsPreviewsTagByJobId(jobId: string) {
   return `${questionsTag}:previews:job:${jobId}`;
+}
+
+export function cacheQuestionById(id: string) {
+  cacheTag(getQuestionTagById(id));
 }
 
 export function cacheQuestionsByJobId(jobId: string) {

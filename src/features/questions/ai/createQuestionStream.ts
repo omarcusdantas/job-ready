@@ -6,12 +6,10 @@ import { createQuestion, getQuestionsByJobId } from "../services";
 import { QuestionDifficulty } from "../utils";
 
 export async function createQuestionStream(jobId: string, difficulty: QuestionDifficulty) {
-  const previousQuestions = await getQuestionsByJobId(jobId);
-
   const job = await getJobById(jobId);
-  if (!job) {
-    return new Response("Job not found", { status: 404 });
-  }
+  if (!job) return new Response("Job not found", { status: 404 });
+
+  const previousQuestions = await getQuestionsByJobId(jobId);
 
   const stream = createUIMessageStream({
     execute: ({ writer }) => {
