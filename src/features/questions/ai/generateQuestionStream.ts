@@ -46,6 +46,7 @@ You must follow these guidelines:
 - Prefer real-world, practical challenges over theoretical or trivia-style questions.
 - The question may focus on one relevant skill or technology if appropriate.
 - It is ok to ask a question about just a single part of the job description, such as a specific technology or skill (e.g., if the job description is for a Next.js, Drizzle, and TypeScript developer, you can ask a TypeScript only question).
+- The question must be different from the previous questions, keep it diverse.
 - Format the question clearly in **Markdown**, with code snippets or bullet points when relevant.
 - Output **only the question**. No explanations, answers, or extra commentary, stop generating output as soon you have provided the full question.`,
   });

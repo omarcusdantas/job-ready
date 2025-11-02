@@ -20,7 +20,7 @@ export function QuestionControls({
 }>) {
   return (
     <div className="mb-4 flex gap-2">
-      {status !== "pending-answer" ? (
+      {status === "init" ? (
         questionDifficulties.map((difficulty) => (
           <Button size="sm" onClick={() => requestQuestion(difficulty)} disabled={isLoading} key={difficulty}>
             <LoadingSwap isLoading={isLoading}>{formatQuestionDifficulty(difficulty)}</LoadingSwap>
@@ -29,9 +29,9 @@ export function QuestionControls({
       ) : (
         <>
           <Button size="sm" variant="outline" onClick={reset} disabled={isLoading}>
-            <LoadingSwap isLoading={isLoading}>Skip</LoadingSwap>
+            <LoadingSwap isLoading={isLoading}>{status === "pending-answer" ? "Skip" : "New question"}</LoadingSwap>
           </Button>
-          <Button size="sm" onClick={requestFeedback} disabled={shouldDisableAnswerButton}>
+          <Button size="sm" onClick={requestFeedback} disabled={shouldDisableAnswerButton || isLoading}>
             <LoadingSwap isLoading={isLoading}>Answer</LoadingSwap>
           </Button>
         </>
