@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { LoadingSwap } from "@/components/ui/loading-swap";
+import { LoadingButton } from "@/components/ui/loading-button";
 import { questionDifficulties } from "@/drizzle/schema";
 import { formatQuestionDifficulty, QuestionDifficulty, QuestionStatus } from "../utils";
 
@@ -22,18 +21,18 @@ export function QuestionControls({
     <div className="mb-4 flex gap-2">
       {status === "init" ? (
         questionDifficulties.map((difficulty) => (
-          <Button size="sm" onClick={() => requestQuestion(difficulty)} disabled={isLoading} key={difficulty}>
-            <LoadingSwap isLoading={isLoading}>{formatQuestionDifficulty(difficulty)}</LoadingSwap>
-          </Button>
+          <LoadingButton size="sm" onClick={() => requestQuestion(difficulty)} isLoading={isLoading} key={difficulty}>
+            {formatQuestionDifficulty(difficulty)}
+          </LoadingButton>
         ))
       ) : (
         <>
-          <Button size="sm" variant="outline" onClick={reset} disabled={isLoading}>
-            <LoadingSwap isLoading={isLoading}>{status === "pending-answer" ? "Skip" : "New question"}</LoadingSwap>
-          </Button>
-          <Button size="sm" onClick={requestFeedback} disabled={shouldDisableAnswerButton || isLoading}>
-            <LoadingSwap isLoading={isLoading}>Answer</LoadingSwap>
-          </Button>
+          <LoadingButton size="sm" variant="outline" onClick={reset} isLoading={isLoading}>
+            {status === "pending-answer" ? "Skip" : "New question"}
+          </LoadingButton>
+          <LoadingButton size="sm" onClick={requestFeedback} disabled={shouldDisableAnswerButton} isLoading={isLoading}>
+            Answer
+          </LoadingButton>
         </>
       )}
     </div>

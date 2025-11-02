@@ -4,10 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoadingSwap } from "@/components/ui/loading-swap";
+import { LoadingButton } from "@/components/ui/loading-button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { experienceLevels, JobsTable } from "@/drizzle/schemas/job";
@@ -104,9 +103,9 @@ export function JobForm({
           )}
         />
 
-        <Button disabled={form.formState.isSubmitting} type="submit" className="w-full">
-          <LoadingSwap isLoading={form.formState.isSubmitting}>Save Job</LoadingSwap>
-        </Button>
+        <LoadingButton isLoading={form.formState.isSubmitting} type="submit" className="w-full">
+          Save Job
+        </LoadingButton>
       </form>
     </Form>
   );
