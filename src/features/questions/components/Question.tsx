@@ -2,18 +2,27 @@
 
 import { useState } from "react";
 import { BackLink } from "@/components/BackLink";
+import { QuestionsTable } from "@/drizzle/schema";
 import { QuestionContainer } from "./QuestionContainer";
 import { QuestionControls } from "./QuestionControls";
 import { useFeedback } from "../hooks/useFeedback";
 import { useQuestion } from "../hooks/useQuestion";
 import { QuestionDifficulty, QuestionStatus } from "../utils";
 
-export function Question({ jobId }: Readonly<{ jobId: string }>) {
+export function Question({
+  jobId,
+  question,
+}: Readonly<{ jobId: string; question?: typeof QuestionsTable.$inferSelect }>) {
   const [answer, setAnswer] = useState<string>("");
-  const [status, setStatus] = useState<QuestionStatus>("init");
+  const [status, setStatus] = useState<QuestionStatus>(() => {
+    if (question) return "pending-answer";
+    return "init";
+  });
 
-  const { question, setQuestion, questionId, isGeneratingQuestion, generateQuestion } = useQuestion({
+  const { questionText, setQuestionText, questionId, isGeneratingQuestion, generateQuestion } = useQuestion({
     jobId,
+    initialQuestionText: question?.text,
+    initialId: question?.id,
     onFinish: () => setStatus("pending-answer"),
   });
 
@@ -22,7 +31,7 @@ export function Question({ jobId }: Readonly<{ jobId: string }>) {
   });
 
   function requestQuestion(difficulty: QuestionDifficulty) {
-    setQuestion("");
+    setQuestionText("");
     setFeedback("");
     setAnswer("");
     generateQuestion(difficulty);
@@ -35,7 +44,7 @@ export function Question({ jobId }: Readonly<{ jobId: string }>) {
 
   function reset() {
     setStatus("init");
-    setQuestion("");
+    setQuestionText("");
     setFeedback("");
     setAnswer("");
   }
@@ -57,7 +66,7 @@ export function Question({ jobId }: Readonly<{ jobId: string }>) {
         <div className="hidden flex-grow md:block" />
       </div>
       <QuestionContainer
-        question={question}
+        question={questionText}
         answer={answer}
         feedback={feedback}
         status={status}

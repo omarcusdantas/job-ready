@@ -9,9 +9,14 @@ const schema = z.object({
   questionId: z.string().min(1),
 });
 
-export function useQuestion({ jobId, onFinish }: Readonly<{ jobId: string; onFinish: () => void }>) {
-  const [questionId, setQuestionId] = useState<string | null>(null);
-  const [question, setQuestion] = useState<string>("");
+export function useQuestion({
+  jobId,
+  initialQuestionText,
+  initialId,
+  onFinish,
+}: Readonly<{ jobId: string; initialQuestionText?: string; initialId?: string; onFinish: () => void }>) {
+  const [questionId, setQuestionId] = useState<string | null>(() => initialId || null);
+  const [questionText, setQuestionText] = useState<string>(() => initialQuestionText || "");
 
   const {
     messages: questionMessages,
@@ -41,12 +46,12 @@ export function useQuestion({ jobId, onFinish }: Readonly<{ jobId: string; onFin
   });
 
   useEffect(() => {
-    if (questionStatus === "submitted") return;
+    if (questionStatus === "submitted" || questionStatus === "ready") return;
 
     const lastAssistantMessage = questionMessages.findLast((m) => m.role === "assistant");
     const question = lastAssistantMessage?.parts.find((p) => p.type === "text")?.text;
 
-    setQuestion(question ?? "");
+    setQuestionText(question ?? "");
   }, [questionMessages]);
 
   function generateQuestion(difficulty: QuestionDifficulty) {
@@ -57,5 +62,5 @@ export function useQuestion({ jobId, onFinish }: Readonly<{ jobId: string; onFin
     return questionStatus === "submitted" || questionStatus === "streaming";
   }, [questionStatus]);
 
-  return { questionId, question, setQuestion, isGeneratingQuestion, generateQuestion };
+  return { questionId, questionText, setQuestionText, isGeneratingQuestion, generateQuestion };
 }
